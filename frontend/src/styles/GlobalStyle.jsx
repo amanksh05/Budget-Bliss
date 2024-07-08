@@ -21,7 +21,9 @@ body {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: clamp(1rem,1.5vw,1.2rem);
     overflow:hidden;
-    color :rgba(34,34,96,.6);
+    // color :rgba(34,34,96,.6);
+    // color : #fafafa; // white color
+    color : #0F0F0F; //  color
 }
 .plus-jakarta-sans-regular {
     font-weight: 400;
