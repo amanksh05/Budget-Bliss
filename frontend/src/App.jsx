@@ -60,7 +60,6 @@ const Appstyled = styled.div`
     border: 3px solid #FFFFFF;
     backdrop-filter: blur(4.5px);
     border-radius: 32px;
-    overflow:auto;
     overflow-x: hidden;
     &::-webkite-scrollbar{
       width: 0;

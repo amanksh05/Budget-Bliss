@@ -7,7 +7,7 @@ const BASE_URL = "http://localhost:5000/api/v1/"
 const GlobalContext = createContext()
 export const GLobalProvider = ({ children }) => {
     const [incomes, setIncomes] = useState([])
-    const [expense, setExpenses] = useState([])
+    const [expenses, setExpenses] = useState([])
 
     const [error, setError] = useState(null)
 
@@ -20,11 +20,10 @@ export const GLobalProvider = ({ children }) => {
         getIncomes()
     }
 
-
     const getIncomes = async () => {
         const response = await axios.get(`${BASE_URL}get-incomes`)
         setIncomes(response.data)
-        console.log(response.data);
+        // console.log(response.data);
     }
 
     const deleteIncome = async (id) => {
@@ -39,8 +38,41 @@ export const GLobalProvider = ({ children }) => {
         })
         return totalIncome
     }
-    console.log(totalIncome());
-    
+    // console.log(totalIncome());
+
+    const addExpense = async (expense) => {
+        const res = await axios.post(`${BASE_URL}add-expense`, expense)
+            .catch((error) => {
+                setError(error.response.data.message)
+            })
+        getExpenses()
+        console.log(expense);
+    }
+
+    const getExpenses = async ()=>{
+        const response = await axios.get(`${BASE_URL}get-expenses`)
+        setExpenses(response.data)
+        console.log(response.data);
+    }
+
+    const deleteExpenses = async (id) => {
+        const res = await axios.delete(`${BASE_URL}/delete-expense/${id}`);
+        getExpenses()
+    }
+    const totalExpense = () => {
+        let totalExpense = 0;
+        expenses.forEach((income) => {
+            totalExpense = totalExpense + income.amount;
+        })
+        return totalExpense
+    }
+
+
+
+
+
+
+
 
     return (
         <GlobalContext.Provider value={
@@ -49,7 +81,12 @@ export const GLobalProvider = ({ children }) => {
                 getIncomes,
                 incomes,
                 deleteIncome,
-                totalIncome
+                totalIncome,
+                addExpense,
+                getExpenses,
+                expenses,
+                deleteExpenses,
+                totalExpense
             }
         }>
             {children}

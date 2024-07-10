@@ -6,8 +6,8 @@ import { useGlobalContext } from '../../context/GlobalContext';
 import Button from '../button/Button';
 import { plus } from '../../utils/Icons';
 
-function Form() {
-    const { addIncome, getIncomes } = useGlobalContext();
+function ExpenseForm() {
+    const {addExpense, getExpenses } = useGlobalContext();
     const [inputState, setInputState] = useState({
         title: '',
         amount: '',
@@ -21,7 +21,8 @@ function Form() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        addIncome(inputState);
+        addExpense(inputState);
+
         // getIncomes()
         setInputState({
             title: '',
@@ -45,7 +46,7 @@ function Form() {
                     type="text"
                     value={title}
                     name="title"
-                    placeholder="Salary title"
+                    placeholder="Expense title"
                     onChange={handleInput('title')}
                 />
             </div>
@@ -54,7 +55,7 @@ function Form() {
                     type="number"
                     value={amount}
                     name="amount"
-                    placeholder="Salary amount"
+                    placeholder="Expense amount"
                     onChange={handleInput('amount')}
                 />
             </div>
@@ -99,7 +100,7 @@ function Form() {
             </div>
             <div className="submit-btn">
                 <Button
-                    name={"Add Income"}
+                    name={"Add Expense"}
                     icon={plus}
                     bPad={'.8rem 1.6rem'}
                     bRad={'30px'}
@@ -158,4 +159,4 @@ const FormStyled = styled.form`
     }
 `;
 
-export default Form;
+export default ExpenseForm;
