@@ -49,7 +49,7 @@ export const GLobalProvider = ({ children }) => {
         console.log(expense);
     }
 
-    const getExpenses = async ()=>{
+    const getExpenses = async () => {
         const response = await axios.get(`${BASE_URL}get-expenses`)
         setExpenses(response.data)
         console.log(response.data);
@@ -65,6 +65,19 @@ export const GLobalProvider = ({ children }) => {
             totalExpense = totalExpense + income.amount;
         })
         return totalExpense
+    }
+
+    const totalBalance = () => {
+        return totalIncome() - totalExpense()
+    }
+
+    const transactionHistory = () => {
+        const history = [...incomes, ...expenses]
+        history.sort((a, b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt)
+        })
+
+        return history.slice(0, 3)
     }
 
 
@@ -86,7 +99,9 @@ export const GLobalProvider = ({ children }) => {
                 getExpenses,
                 expenses,
                 deleteExpenses,
-                totalExpense
+                totalExpense,
+                totalBalance,
+                transactionHistory
             }
         }>
             {children}
