@@ -95,9 +95,10 @@ const NavStyled = styled.nav`
         }
     }
     .active{
-        color:rgba(34,34,96,1);
+        color:rgba(34,34,96,1) !important;
+        font-weight: 700 !important;
         i{
-            color:rgba(34,34,96,1);
+            color:rgba(34,34,96,1) !important;
         }
         &::before{
             content: "";

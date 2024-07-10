@@ -26,7 +26,7 @@ function Orb() {
         margin-right: -35vh;
         background: linear-gradient(180deg, #f56692 0%, #f2994a 100%);
         filter: blur(300px);
-        animation: ${moveOrb} 15s alternate linear infinite;
+        animation: ${moveOrb} 1s alternate linear infinite;
     `;
 
     return <OrbStyled />;
