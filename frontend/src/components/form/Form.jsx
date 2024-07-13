@@ -11,7 +11,6 @@ function Form() {
     const [inputState, setInputState] = useState({
         title: '',
         amount: '',
-        // date: new Date(), // Initialize with current date
         date: '', // Initialize with current date
         category: '',
         description: '',
