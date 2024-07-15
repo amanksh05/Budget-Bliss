@@ -12,14 +12,12 @@ function Income() {
   return (
     <IncomeStyled>
       <InnerLayout>
-        {/* <h1>Incomes</h1> */}
-        {/* <h2 className='text-white flex bg-slate-500 justify-center rounded-sm py-3 my-1 text-2xl font-medium '>Total Income:      <span className='font-mono'>${totalIncome()}</span></h2> */}
-        <div className='flex flex-row justify-between items-center bg-cyan-900 py-4 px-8 rounded-md mb-8'>
-          <div className='text-xl'>
+        <div className='flex flex-row justify-between items-center bg-cyan-950 py-4 px-8 rounded-md mb-8'>
+          <div className='text-xl font-medium'>
             Total Income
           </div>
           <div className='font-mono text-2xl font-semibold'>
-            ${totalIncome()}
+            $ {totalIncome()}
           </div>
         </div>
         {/* <div className="income-content"> */}
@@ -27,24 +25,29 @@ function Income() {
           <div className="form-container">
             <Form />
           </div>
-          <div className="flex flex-col gap-1">
-            {
-              incomes.map((income) => {
-                const { _id, title, amount, date, category, description, type } = income;
-                return <IncomeItem
-                  key={_id}
-                  id={_id}
-                  title={title}
-                  description={description}
-                  amount={amount}
-                  date={date}
-                  type={type}
-                  category={category}
-                  indicatorColor="var(--color-green)"
-                  deleteItem={deleteIncome}
-                />
-              })
-            }
+          <div className='flex flex-col gap-6 mt-4 p-2'>
+            <h5 className='underline underline-offset-8 font-base  '>
+              Recent incomes
+            </h5>
+            <div className="flex flex-col gap-2">
+              {
+                incomes.map((income) => {
+                  const { _id, title, amount, date, category, description, type } = income;
+                  return <IncomeItem
+                    key={_id}
+                    id={_id}
+                    title={title}
+                    description={description}
+                    amount={amount}
+                    date={date}
+                    type={type}
+                    category={category}
+                    indicatorColor="var(--color-green)"
+                    deleteItem={deleteIncome}
+                  />
+                })
+              }
+            </div>
           </div>
         </div>
 

@@ -47,7 +47,7 @@ function IncomeItem({
 
     return (
         <IncomeItemStyled indicator={indicatorColor}>
-            <div className='flex flex-row items-center gap-10'>
+            <div className='flex flex-row items-center gap-10 pl-2'>
                 <div className='w-12 h-12 flex items-center justify-center rounded-full border-2 border-solid border-gray-500 background: #f5f5f5 text-2xl'>
                     {type === 'expense' ? expenseCatIcon() : categoryIcon()}
                 </div>
@@ -82,7 +82,7 @@ const IncomeItemStyled = styled.div`
     box-shadow: 0px 1px 15px rgba(0,0,0,0.06);
     border-radius: 10px;
     padding: 1rem;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
     display: flex;
     align-items: center;
     justify-content: space-between;
