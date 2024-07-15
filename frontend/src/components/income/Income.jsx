@@ -5,41 +5,50 @@ import { useGlobalContext } from '../../context/GlobalContext'
 import Form from '../form/Form'
 import IncomeItem from '../incomeItem/IncomeItem'
 function Income() {
-  const {addIncome,getIncomes,incomes,deleteIncome,totalIncome} = useGlobalContext()
-  useEffect(()=>{
+  const { addIncome, getIncomes, incomes, deleteIncome, totalIncome } = useGlobalContext()
+  useEffect(() => {
     getIncomes()
-  },[])
+  }, [])
   return (
     <IncomeStyled>
-        <InnerLayout>
-            <h1>Incomes</h1>
-            <h2 className='total-income'>Total Income: <span>${totalIncome()}</span></h2>
-            <div className="income-content">
-                <div className="form-container">
-                  <Form/>
-                </div>
-                <div className="incomes">
-                    {
-                      incomes.map((income)=>{
-                        const {_id,title, amount, date, category,description,type} = income;
-                        return <IncomeItem
-                          key={_id}
-                          id={_id}
-                          title={title}
-                          description={description}
-                          amount={amount}
-                          date={date}
-                          type={type}
-                          category={category}
-                          indicatorColor="var(--color-green)"
-                          deleteItem={deleteIncome}
-                        />
-                      })
-                    }
-                </div>
-            </div>
+      <InnerLayout>
+        {/* <h1>Incomes</h1> */}
+        {/* <h2 className='text-white flex bg-slate-500 justify-center rounded-sm py-3 my-1 text-2xl font-medium '>Total Income:      <span className='font-mono'>${totalIncome()}</span></h2> */}
+        <div className='flex flex-row justify-between items-center bg-cyan-900 py-4 px-8 rounded-md mb-8'>
+          <div className='text-xl'>
+            Total Income
+          </div>
+          <div className='font-mono text-2xl font-semibold'>
+            ${totalIncome()}
+          </div>
+        </div>
+        {/* <div className="income-content"> */}
+        <div className="flex flex-col">
+          <div className="form-container">
+            <Form />
+          </div>
+          <div className="flex flex-col gap-1">
+            {
+              incomes.map((income) => {
+                const { _id, title, amount, date, category, description, type } = income;
+                return <IncomeItem
+                  key={_id}
+                  id={_id}
+                  title={title}
+                  description={description}
+                  amount={amount}
+                  date={date}
+                  type={type}
+                  category={category}
+                  indicatorColor="var(--color-green)"
+                  deleteItem={deleteIncome}
+                />
+              })
+            }
+          </div>
+        </div>
 
-        </InnerLayout>
+      </InnerLayout>
     </IncomeStyled>
   )
 }

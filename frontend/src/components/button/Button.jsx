@@ -1,19 +1,22 @@
 import React from 'react'
 import styled from 'styled-components'
 
-function Button({ name, icon, onClick, bg, bPad, color, bRad }) {
+function Button({ name, icon, onClick, bPad, color }) {
     return (
-        <ButtonStyled style={
+
+        <button style={
             {
-                background: bg,
+
                 padding: bPad,
-                borderRadius: bRad,
                 color: color,
             }
-        } onClick={onClick}>
-            {icon}
-            {name}
-        </ButtonStyled>
+
+        }
+            onClick={onClick}
+            className='flex w-full  justify-center items-center gap-5 bg-black transition-all duration-[0.4s] ease-[ease-in-out] cursor-pointer rounded-lg border-[none] outline: none hover:bg-gray-900 text-lg font-semibold '
+        >
+            {icon} {name}
+        </button>
     )
 }
 const ButtonStyled = styled.button`

@@ -30,16 +30,16 @@ function IncomeItem({
         }
     }
 
-    const expenseCatIcon = ()=>{
-        switch(category){
-            case 'education' : return book;
+    const expenseCatIcon = () => {
+        switch (category) {
+            case 'education': return book;
             case 'groceries': return food;
-            case 'health' : return medical;
-            case 'subscriptions' : return tv;
-            case 'takeaways' : return takeaway;
+            case 'health': return medical;
+            case 'subscriptions': return tv;
+            case 'takeaways': return takeaway;
             case 'clothing': return clothing;
             case 'travelling': return freelance;
-            case 'other' : return circle;
+            case 'other': return circle;
             default: return '';
         }
     }
@@ -47,47 +47,48 @@ function IncomeItem({
 
     return (
         <IncomeItemStyled indicator={indicatorColor}>
-            <div className='icon'>
-                {type === 'expense' ? expenseCatIcon() : categoryIcon()}
-            </div>
-            <div className='content'>
-                <h5>{title}</h5>
-                <div className="inner-content">
-                    <div className="text">
-                        <p>{dollar}{amount}</p>
-                        <p>{calender} {dateFormat(date)}</p>
-                        <p>{comment} {description}</p>
+            <div className='flex flex-row items-center gap-10'>
+                <div className='w-12 h-12 flex items-center justify-center rounded-full border-2 border-solid border-gray-500 background: #f5f5f5 text-2xl'>
+                    {type === 'expense' ? expenseCatIcon() : categoryIcon()}
+                </div>
+                <div className='flex flex-col gap-2'>
+
+                    <h5 className='text-xl font-semibold capitalize'>{title}</h5>
+
+                    <div className="flex flex-wrap gap-10">
+                        <p className='text-sm flex items-center gap-2'>{dollar}{amount}</p>
+                        <p className='text-sm flex items-center gap-2'>{calender} {dateFormat(date)}</p>
+                        <p className='text-sm flex items-center gap-2'>{comment} {description}</p>
                     </div>
-                    <div className="btn-con">
-                        <Button
-                            icon={trash}
-                            bPad={'1rem'}
-                            bRad={'50%'}
-                            bg={'var(--primary-color'}
-                            color={'#fff'}
-                            iColor={'#fff'}
-                            hColor={'var(--color-green)'}
-                            onClick={()=>deleteItem(id)}
-                        />
-                    </div>
+
                 </div>
             </div>
+            <div className="btn-con">
+                <Button
+                    icon={trash}
+                    bPad={'1rem'}
+                    color={'#fff'}
+                    iColor={'#c90000'}
+                    onClick={() => deleteItem(id)}
+                />
+            </div>
+
         </IncomeItemStyled>
     )
 }
 const IncomeItemStyled = styled.div`
-    background: #FCF6F9;
-    border: 2px solid #FFFFFF;
+    background:rgba(0, 0, 0, 0.455);
+    border: 2px solid #4c4c4c;
     box-shadow: 0px 1px 15px rgba(0,0,0,0.06);
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 1rem;
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    justify-content: space-between;
     width: 100%;
     color: #222260;
-    .icon{
+    /* .icon{
         width: 80px;
         height: 80px;
         border-radius: 20px;
@@ -99,8 +100,8 @@ const IncomeItemStyled = styled.div`
         i{
             font-size: 2.6rem;
         }
-    }
-    .content{
+    } */
+    /* .content{
         flex: 1;
         display: flex;
         flex-direction: column;
@@ -138,7 +139,7 @@ const IncomeItemStyled = styled.div`
                 opacity: 0.8;
             }
         }
-    }
+    } */
 `
 
 export default IncomeItem

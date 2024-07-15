@@ -5,17 +5,21 @@ import { signout } from '../../utils/Icons'
 import { useGlobalContext } from '../../context/GlobalContext'
 
 function Navigation({ active, setActive }) {
-  const { logout } = useGlobalContext();  
+  const { logout } = useGlobalContext();
 
   return (
     <NavStyled>
+      <div className='flex flex-col gap-4' >
       <div className="user-con">
-        <img src="" alt="" />
+        <img src="" alt="" className='h-16 w-16' />
         <div className="text">
-          <h2>Aman</h2>
-          <p>Your Money</p>
+          <h2 className='font-semibold text-xl'>Aman</h2>
+          <p className='text-xs'>Your Money</p>
         </div>
       </div>
+      <div className='w-full h-px rounded-lg bg-[#a0a0a0]'></div>
+      </div>
+
       <ul className="menu-items">
         {menuItems.map((item) => (
           <li
@@ -28,10 +32,8 @@ function Navigation({ active, setActive }) {
           </li>
         ))}
       </ul>
-      <div className="bottom-nav" onClick={logout}>
-        <li>
-          {signout} Sign Out
-        </li>
+      <div className="bg-black flex justify-center py-3 rounded-md" onClick={logout}>
+        <button className='flex items-center justify-center gap-3 text-base cursor-pointer'>Sign Out </button>
       </div>
     </NavStyled>
   )
@@ -39,12 +41,12 @@ function Navigation({ active, setActive }) {
 
 const NavStyled = styled.nav`
   padding: 2rem 1.5rem;
-  width: 374px;
+  width: 20vw;
   height: 100%;
-  background: rgba(252, 246, 249, 0.78); 
-  border: 3px solid #FFFFFF;
+  background: rgba(51, 51, 51, 0.78); 
+  border: 2px solid #585858;
   backdrop-filter: blur(4.5px);
-  border-radius: 32px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -56,8 +58,8 @@ const NavStyled = styled.nav`
     align-items: center;
     gap: 1rem;
     img {
-      width: 80px;
-      height: 80px;
+      /* width: 80px;
+      height: 80px; */
       border-radius: 50%;
       object-fit: cover;
       background: #fcf6f9;
@@ -65,13 +67,7 @@ const NavStyled = styled.nav`
       padding: 0.2rem;
       box-shadow: 0px 1px 17px rgba(0,0,0,0.6);
     }
-    h2 {
-      color: rgba(34,34,96,1);
-      font-weight: 600;
-    }
-    p {
-      color: rgba(34,34,96,.6);
-    }
+
   }
 
   .menu-items {
@@ -83,14 +79,15 @@ const NavStyled = styled.nav`
       grid-template-columns: 40px auto;
       align-items: center;
       margin: .6rem 0;
-      font-weight: 500;
+      font-weight: 300;
+      font-size: medium;
       cursor: pointer;
       transition: all .4s ease-in-out;
-      color: rgba(34, 34, 96, .6);
+      /* color: rgba(34, 34, 96, .6); */
       padding-left: 1rem;
       position: relative;
       i {
-        color: rgba(34,34,96,.6);
+        color: rgb(255, 255, 255);
         font-size: 1.4rem;
         transition: all .4s ease-in-out;
       }
@@ -99,9 +96,12 @@ const NavStyled = styled.nav`
 
   .active {
     color:rgba(34,34,96,1) !important;
-    font-weight: 700 !important;
+    font-weight: 00 !important;
+    /* letter-spacing: 0.02rem; */
+    font-weight: 400 !important;
+    font-size: large !important;
     i {
-      color:rgba(34,34,96,1) !important;
+      color:#ededed !important;
     }
     &::before {
       content: "";
@@ -110,7 +110,7 @@ const NavStyled = styled.nav`
       top: 0;
       width: 4px;
       height: 100%;
-      background: #222260;
+      background: #efefef;
       border-radius: 0 10px 10px 0;
     }
   }

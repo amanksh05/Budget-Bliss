@@ -11,9 +11,11 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import { useGlobalContext } from './context/GlobalContext';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   const { user } = useGlobalContext();
+  // const user = null
   const [active, setActive] = useState(1);
   const orbMemo = useMemo(() => <Orb />, []);
 
@@ -32,9 +34,9 @@ function App() {
     }
   };
 
-  const PrivateRoute = ({ children }) => {
-    return user ? children : <Navigate to='/login' />;
-  };
+  // const PrivateRoute = ({ children }) => {
+  //   return user ? children : <Navigate to='/login' />;
+  // };
 
   return (
     <Router>
@@ -80,10 +82,10 @@ const AppStyled = styled.div`
   position: relative;
   main {
     flex: 1;
-    background: rgba(252, 246, 249, 0.78);
-    border: 3px solid #ffffff;
+    background: rgba(51, 51, 51, 0.78);
+    border: 2px solid #585858;
     backdrop-filter: blur(4.5px);
-    border-radius: 32px;
+    border-radius: 10px;
     overflow-x: hidden;
     &::-webkit-scrollbar {
       width: 0;
