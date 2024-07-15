@@ -83,7 +83,7 @@ function Form() {
                         name="category"
                         id="category"
                         onChange={handleInput('category')}
-                        className='custom-select px-6 py-3 text-base rounded-md w-full pr-10 appearance-none  '
+                        className='custom-select px-6 py-3 text-base rounded-md w-full pr-10 appearance-none'
                     >
                         <option value="" disabled>Select Option</option>
                         <option value="salary">Salary</option>

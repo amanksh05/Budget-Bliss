@@ -5,41 +5,52 @@ import { useGlobalContext } from '../../context/GlobalContext'
 import IncomeItem from '../incomeItem/IncomeItem'
 import ExpenseForm from './ExpenseForm'
 function Expenses() {
-  const {addExpense, getExpenses,expenses,deleteExpenses,totalExpense} = useGlobalContext()
-  useEffect(()=>{
+  const { addExpense, getExpenses, expenses, deleteExpenses, totalExpense } = useGlobalContext()
+  useEffect(() => {
     getExpenses()
-  },[])
+  }, [])
   return (
     <ExpenseStyled>
-        <InnerLayout>
-            <h1>Expenses</h1>
-            <h2 className='total-expense'>Total Expense: <span>${totalExpense()}</span></h2>
-            <div className="expense-content">
-                <div className="form-container">
-                  <ExpenseForm/>
-                </div>
-                <div className="expenses">
-                    {
-                      expenses.map((expense)=>{
-                        const {_id,title, amount, date, category,description,type} = expense;
-                        return <IncomeItem
-                          key={_id}
-                          id={_id}
-                          title={title}
-                          description={description}
-                          amount={amount}
-                          date={date}
-                          type={type}
-                          category={category}
-                          indicatorColor="var(--color-green)"
-                          deleteItem={deleteExpenses}
-                        />
-                      })
-                    }
-                </div>
+      <InnerLayout>
+        <div className='flex flex-row justify-between items-center bg-cyan-950 py-4 px-8 rounded-md mb-8'>
+          <div className='text-xl font-medium'>
+            Total Expense
+          </div>
+          <div className='font-mono text-2xl font-semibold'>
+            $ {totalExpense()}
+          </div>
+        </div>
+        <div className="flex flex-col">
+          <div className="form-container">
+            <ExpenseForm />
+          </div>
+          <div className='flex flex-col gap-6 mt-4 p-2'>
+            <h5 className='underline underline-offset-8 font-base  '>
+              Recent expenses
+            </h5>
+            <div className="flex flex-col gap-2">
+              {
+                expenses.map((expense) => {
+                  const { _id, title, amount, date, category, description, type } = expense;
+                  return <IncomeItem
+                    key={_id}
+                    id={_id}
+                    title={title}
+                    description={description}
+                    amount={amount}
+                    date={date}
+                    type={type}
+                    category={category}
+                    indicatorColor="var(--color-green)"
+                    deleteItem={deleteExpenses}
+                  />
+                })
+              }
             </div>
+          </div>
+        </div>
 
-        </InnerLayout>
+      </InnerLayout>
     </ExpenseStyled>
   )
 }

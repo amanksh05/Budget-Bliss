@@ -7,7 +7,7 @@ import Button from '../button/Button';
 import { plus } from '../../utils/Icons';
 
 function ExpenseForm() {
-    const {addExpense, getExpenses } = useGlobalContext();
+    const { addExpense, getExpenses } = useGlobalContext();
     const [inputState, setInputState] = useState({
         title: '',
         amount: '',
@@ -41,6 +41,10 @@ function ExpenseForm() {
 
     return (
         <FormStyled onSubmit={handleSubmit}>
+            <div className='flex flex-col gap-3 justify-center items-center mb-8 font-medium text-1xl'>
+                Expense Details
+                <div className='w-2/4 h-px rounded-lg bg-[#a0a0a0]'></div>
+            </div>
             <div className="input-control">
                 <input
                     type="text"
@@ -48,54 +52,63 @@ function ExpenseForm() {
                     name="title"
                     placeholder="Expense title"
                     onChange={handleInput('title')}
+                    className='px-6 py-3 text-base rounded-md w-full text-black'
                 />
             </div>
-            <div className="input-control">
-                <input
-                    type="number"
-                    value={amount}
-                    name="amount"
-                    placeholder="Expense amount"
-                    onChange={handleInput('amount')}
-                />
+            <div className='flex flex-row flex-wrap w-full gap-3 justify-between '>
+
+                <div className="input-control flex-1">
+                    <input
+                        type="number"
+                        value={amount}
+                        name="amount"
+                        placeholder="Expense amount"
+                        onChange={handleInput('amount')}
+                        className='px-6 py-3 w-full text-base rounded-md  text-black'
+                    />
+                </div>
+                <div className="input-control flex-1">
+                    <DatePicker
+                        id="date"
+                        placeholderText="Enter a Date"
+                        selected={date}
+                        dateFormat="dd/MM/yyyy"
+                        onChange={(date) => setInputState({ ...inputState, date })}
+                        className='px-6 py-3 w-full text-base rounded-md  text-black'
+                        wrapperClassName="w-full"
+                    />
+                </div>
+                <div className="text-black flex-1">
+                    <select
+                        required
+                        value={category}
+                        name="category"
+                        id="category"
+                        onChange={handleInput('category')}
+                        className='custom-select px-6 py-3 text-base rounded-md w-full pr-10 appearance-none'
+                    >
+                        <option value="" disabled>Select Option</option>
+                        <option value="education">Education</option>
+                        <option value="groceries">Groceries</option>
+                        <option value="health">Health</option>
+                        <option value="subscriptions">Subscriptions</option>
+                        <option value="takeaways">Takeaways</option>
+                        <option value="clothing">Clothing</option>
+                        <option value="travelling">Travelling</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
             </div>
-            <div className="input-control">
-                <DatePicker
-                    id="date"
-                    placeholderText="Enter a Date"
-                    selected={date}
-                    dateFormat="dd/MM/yyyy"
-                    onChange={(date) => setInputState({ ...inputState, date })}
-                />
-            </div>
-            <div className="selects input-control">
-                <select
-                    required
-                    value={category}
-                    name="category"
-                    id="category"
-                    onChange={handleInput('category')}
-                >
-                    <option value="" disabled>Select Option</option>
-                    <option value="salary">Salary</option>
-                    <option value="freelancing">Freelancing</option>
-                    <option value="investments">Investments</option>
-                    <option value="stocks">Stocks</option>
-                    <option value="bitcoin">Bitcoin</option>
-                    <option value="bank">Bank</option>
-                    <option value="youtube">YouTube</option>
-                    <option value="other">Other</option>
-                </select>
-            </div>
-            <div className="input-control">
+            <div className="input-control w-full">
                 <textarea
                     value={description}
                     name="description"
                     placeholder="Add a description"
                     id='description'
                     cols="30"
-                    rows="4"
+                    rows="2"
                     onChange={handleInput('description')}
+                    className='px-6 py-3 text-base rounded-md w-full text-black '
                 />
             </div>
             <div className="submit-btn">
@@ -103,10 +116,7 @@ function ExpenseForm() {
                     name={"Add Expense"}
                     icon={plus}
                     bPad={'.8rem 1.6rem'}
-                    bRad={'30px'}
-                    bg={'var(--color-accent'}
                     color={'#fff'}
-                    h
                 />
             </div>
         </FormStyled>
@@ -115,48 +125,14 @@ function ExpenseForm() {
 
 const FormStyled = styled.form`
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
-    gap: 2rem;
-    input,textarea,select{
-        font-family: inherit;
-        font-size: inherit;
-        outline: none;
-        border: none;
-        padding: .5rem 1rem;
-        border-radius: 5px;
-        border: 2px solid #fff;
-        background: transparent;
-        resize: none;
-        box-shadow: 0px 1px 15px rgba(0,0,0,0.6);
-        color: rgba(34,34,96,0.9);
-        &::placeholder{
-            color: rgba(34,34,96,0.4);
-        }
-    }
-    .input-control{
-        input{
-            width: 100%;
-        }
-    }
-    .selects{
-        display: flex;
-        justify-content: flex-end;
-        select{
-            color: rgba(34,34,96,0.4);
-            &:focus ,&:active{
-                color: rgba(34,34,96,1);
-            }
-        }
-    }
-
-    .submit-btn{
-        button{
-            box-shadow: 0px 1px 15px rgba(0,0,0,0.6);
-            &:hover{
-                background: var(--color-green) !important;
-            }
-        }
-    }
+    gap: 0.8rem; 
+    padding: 2rem 2rem;
+    background-color: #3c3c3c;
+    border-radius: 8px;
+    /* padding-bottom: 20px; */
+    margin-bottom: 20px;
 `;
 
 export default ExpenseForm;

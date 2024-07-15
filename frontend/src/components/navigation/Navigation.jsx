@@ -33,7 +33,7 @@ function Navigation({ active, setActive }) {
         ))}
       </ul>
       <div className="bg-black flex justify-center py-3 rounded-md" onClick={logout}>
-        <button className='flex items-center justify-center gap-3 text-base cursor-pointer'>Sign Out </button>
+        <button className='flex items-center justify-center gap-4 text-base cursor-pointer'>{signout}Sign Out </button>
       </div>
     </NavStyled>
   )
