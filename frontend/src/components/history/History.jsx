@@ -9,22 +9,22 @@ function History() {
 
     return (
         <HistoryStyled>
-            <h2>Recent History</h2>
+            <h2 className='font-serif underline underline-offset-8 mb-4 pl-6'>Last transactions</h2>
             {history.map((item) =>{
                 const {_id, title, amount, type} = item
                 return (
-                    <div key={_id} className="history-item">
-                        <p style={{
-                            color: type === 'expense' ? 'red' : 'var(--color-green)'
+                    <div key={_id} className="flex flex-row w-full justify-between border-2 border-zinc-600 bg-zinc-900 p-3 px-8 rounded-lg box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06)">
+                        <p className='capitalize' style={{
+                            color: type === 'expense' ? 'red' : 'green'
                         }}>
                             {title}
                         </p>
 
                         <p style={{
-                            color: type === 'expense' ? 'red' : 'var(--color-green)'
+                            color: type === 'expense' ? 'red' : 'green'
                         }}>
                             {
-                                type === 'expense' ? `-${amount <= 0 ? 0 : amount}` : `+${amount <= 0 ? 0: amount}`
+                                type === 'expense' ? `- ${amount <= 0 ? 0 : amount}` : `+ ${amount <= 0 ? 0: amount}`
                             }
                         </p>
                     </div>
@@ -37,17 +37,8 @@ function History() {
 const HistoryStyled = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    .history-item{
-        background: #FCF6F9;
-        border: 2px solid #FFFFFF;
-        box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
-        padding: 1rem;
-        border-radius: 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+    flex: 1 1 0%; 
+    gap: 0.5rem;
 `;
 
 export default History

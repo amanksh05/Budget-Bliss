@@ -23,7 +23,7 @@ const Signup = () => {
 
   return (
     <div className='flex justify-center flex-col items-center bg-slate-50 mt-11 mx-auto  py-4 px-10 max-w-min rounded-lg' >
-      <h2 className='font-semibold'>Register to continue</h2>
+      <h2 className='font-semibold text-black'>Register to continue</h2>
       <form onSubmit={handleSubmit} className='w-full mt-4'>
       <div className='flex flex-col justify-center items-center gap-3'>
         <input

@@ -7,7 +7,7 @@ import { useGlobalContext } from '../../context/GlobalContext'
 import History from '../history/History'
 
 function Dashboard() {
-  const { totalIncome,incomes,expenses, totalExpense, totalBalance, transactionHistory, getIncomes, getExpenses } = useGlobalContext()
+  const { totalIncome, incomes, expenses, totalExpense, totalBalance, transactionHistory, getIncomes, getExpenses } = useGlobalContext()
 
   useEffect(() => {
     getExpenses()
@@ -16,67 +16,104 @@ function Dashboard() {
   return (
     <DashboardStyled>
       <InnerLayout>
-        <h1>All Transactions</h1>
-        <div className="stats-con">
-          <div className="chart-con">
+        <div className="flex flex-col gap-10">
+          {/* chart+ transaction */}
+          <div className="flex flex-col items-center justify-between gap-4">
+
+            <div className="flex flex-row gap-5 w-full  justify-evenly ">
+
+
+              <div className="bg-zinc-800 border-2 border-solid border-zinc-400 flex flex-col flex-1 items-center justify-center rounded-lg gap-10 p-8 ">
+                <h2 className='flex items-start w-full font-serif  text-slate-200 '>Total Income</h2>
+                <p className='flex gap-2 items-baseline text-7xl font-sans'>
+                  <span className=' font-serif  text-gray-300 text-2xl'>$ </span>{totalIncome()}
+                </p>
+              </div>
+
+
+              <div className="bg-zinc-800 border-2 border-solid border-zinc-400 flex flex-col flex-1 items-center justify-center rounded-md gap-10 p-8 ">
+                <h2 className='flex items-start w-full font-serif  text-slate-200 '>Total Expense</h2>
+                <p className='flex gap-2 items-baseline text-7xl font-sans'>
+                  <span className=' font-serif  text-gray-300 text-2xl'>$ </span>{totalExpense()}
+                </p>
+              </div>
+
+
+              <div className="bg-zinc-800 border-2 border-solid border-zinc-400 flex flex-col flex-1 items-center justify-center rounded-md gap-10 p-8 ">
+                <h2 className='flex items-start w-full font-serif  text-slate-200 text-xl'>Total Balance</h2>
+                <p className='flex gap-2 items-baseline text-7xl font-sans' >
+                  <span className=' font-serif  text-gray-300 text-2xl'>$ </span>{totalBalance()}
+                </p>
+              </div>
+
+
+            </div>
             <Chart />
-            <div className="amount-con">
-              <div className="income">
-                <h2>Total Income</h2>
-                <p>
-                  {dollar} {totalIncome()}
-                </p>
-              </div>
-              <div className="expense">
-                <h2>Total Expense</h2>
-                <p>
-                  {dollar} {totalExpense()}
-                </p>
-              </div>
-              <div className="balance">
-                <h2>Total Balance</h2>
-                <p>
-                  {dollar} {totalBalance()}
-                </p>
-              </div>
-            </div>
           </div>
-          <div className="history-con">
+
+
+
+          <div className="flex justify-between  gap-10">
             <History />
-            <h2 className="salary-title">Min <span>Salary</span>Max</h2>
-            <div className="salary-item">
-              <p>
-                ${Math.min(...incomes.map(item => item.amount))}
-              </p>
-              <p>
-                ${Math.max(...incomes.map(item => item.amount))}
-              </p>
-            </div>
-            <h2 className="salary-title">Min <span>Expense</span>Max</h2>
-            <div className="salary-item">
-              <p>
-                ${Math.min(...expenses.map(item => item.amount))}
-              </p>
-              <p>
-                ${Math.max(...expenses.map(item => item.amount))}
-              </p>
+            <div className='flex flex-1 flex-col justify-between '>
+              <h2 className='flex flex-col items-end w-full underline underline-offset-8 font-serif mb-6 pr-6'>Stats</h2>
+              <div className='flex flex-1 flex-row gap-5'>
+
+
+                <div className="flex flex-col justify-center items-center flex-1 border-2 p-4 gap-6 rounded-lg border-zinc-700 bg-zinc-900">
+                  <h2 className=" text-zinc-300 underline underline-offset-4">Income</h2>
+                  <div className='flex flex-row justify-between w-full'>
+                    <div className='flex items-center flex-col gap-2'>
+                      <h3 className=' text-zinc-400'>Minimum</h3>
+                      <p>
+                        ${Math.min(...incomes.map(item => item.amount))}
+                      </p>
+                    </div>
+                    <div className='flex items-center flex-col gap-2 '>
+                      <h3 className=' text-zinc-400'>Maximum</h3>
+                      <p>
+                        ${Math.max(...incomes.map(item => item.amount))}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div className="flex flex-col justify-center items-center flex-1 border-2 p-4 gap-6 rounded-lg border-zinc-700 bg-zinc-900">
+                  <h2 className="text-zinc-300 underline underline-offset-4">Expense</h2>
+                  <div className='flex flex-row justify-between w-full'>
+                    <div className='flex items-center flex-col gap-2'>
+                      <h3 className=' text-zinc-400'>Min</h3>
+                      <p>
+                        ${Math.min(...expenses.map(item => item.amount))}
+                      </p>
+                    </div>
+                    <div className='flex items-center flex-col gap-2'>
+                      <h3 className=' text-zinc-400'>Max</h3>
+                      <p>
+                        ${Math.max(...expenses.map(item => item.amount))}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </InnerLayout>
-    </DashboardStyled>
+    </DashboardStyled >
   )
 }
 
 const DashboardStyled = styled.div`
-    .stats-con{
+    /* .stats-con{
         display: grid;
         grid-template-columns: repeat(5, 1fr);
         gap: 2rem;
         .chart-con{
-            grid-column: 1 / 4;
-            height: 400px;
-            .amount-con{
+            grid-column: 1 / 4; */
+            /* height: 400px; */
+            /* .amount-con{
                 display: grid;
                 grid-template-columns: repeat(4, 1fr);
                 gap: 2rem;
@@ -108,10 +145,10 @@ const DashboardStyled = styled.div`
                         font-size: 4.5rem;
                     }
                 }
-            }
-        }
+            } */
+        /* } */
 
-        .history-con{
+        /* .history-con{
             grid-column: 4 / -1;
             h2{
                 margin: 1rem 0;
@@ -133,14 +170,14 @@ const DashboardStyled = styled.div`
                 border-radius: 20px;
                 display: flex;
                 justify-content: space-between;
-                align-items: center;
-                p{
+                align-items: center; */
+                /* p{
                     font-weight: 600;
                     font-size: 1.6rem;
-                }
-            }
-        }
-    }
+                } */
+            /* } */
+        /* } */
+    /* } */
 `;
 
 export default Dashboard
