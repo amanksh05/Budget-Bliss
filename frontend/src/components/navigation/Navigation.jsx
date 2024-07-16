@@ -5,16 +5,16 @@ import { signout } from '../../utils/Icons'
 import { useGlobalContext } from '../../context/GlobalContext'
 
 function Navigation({ active, setActive }) {
-  const { logout } = useGlobalContext();
+  const { logout,userInfo } = useGlobalContext();
 
   return (
     <NavStyled>
       <div className='flex flex-col gap-4' >
-      <div className="user-con">
+      <div className="user-con" >
         <img src="" alt="" className='h-16 w-16' />
         <div className="text">
-          <h2 className='font-semibold text-xl'>Aman</h2>
-          <p className='text-xs'>Your Money</p>
+          <h2 className='font-semibold text-xl capitalize'>{userInfo}</h2>
+          <p className='text-xs'>Your money</p>
         </div>
       </div>
       <div className='w-full h-px rounded-lg bg-[#a0a0a0]'></div>

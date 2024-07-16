@@ -10,8 +10,8 @@ export const GlobalProvider = ({ children }) => {
   const [expenses, setExpenses] = useState([]);
   const [user, setUser] = useState(localStorage.getItem('token') || null);
   const [error, setError] = useState(null);
-  const [userId, setUserId] = useState(null)
-  const [userInfo,setUserInfo] = useState({});
+  const [userId, setUserId] = useState(localStorage.getItem('userId') || null)
+  const [userInfo,setUserInfo] = useState(localStorage.getItem('userInfo') || null);
 
   const register = async (username, email, password) => {
     const res = await axios.post(`${BASE_URL}/auth/register`, { username, email, password })
@@ -23,19 +23,32 @@ export const GlobalProvider = ({ children }) => {
     setUser(res.data.token);
     setUserId(res.data.id)
     console.log(res.data.id);
-    // console.log(userId);
     localStorage.setItem('token', res.data.token);
+    localStorage.setItem('userId', res.data.id);
+    userDetails(userId)
   }
 
-  // const userDetails = async () =>{
-  //   const response = await axios.get(`${BASE_URL}/auth/profile`,{userId});
-  //   setUserInfo(response.data)
-  //   console.log(response.data);
-  // }
+  const userDetails = async (userId) => {
+    try {
+        const response = await axios.post(`${BASE_URL}/auth/profile`, { userId });
+        localStorage.setItem('userInfo', response.data.username);
+        console.log(userInfo.name);
+
+  
+    } catch (error) {
+        console.error('Nhi hua');
+        console.log(userId);
+    }
+    console.log("userdetails: ", {userId});
+};
+
+
 
   const logout = () => {
     setUser(null);
     localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('userInfo');
   }
 
   const addIncome = async (income) => {
@@ -153,7 +166,8 @@ export const GlobalProvider = ({ children }) => {
         login,
         logout,
         error,
-        // userDetails
+        userDetails,
+        userInfo
       }}
     >
       {children}
