@@ -1,30 +1,37 @@
-import React from 'react'
-import styled from 'styled-components'
-import { menuItems } from '../../utils/menuItems'
-import { signout } from '../../utils/Icons'
-import { useGlobalContext } from '../../context/GlobalContext'
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { menuItems } from '../../utils/menuItems';
+import { signout } from '../../utils/Icons';
+import { useGlobalContext } from '../../context/GlobalContext';
+import { useNavigate } from 'react-router-dom';
 
-function Navigation({ active, setActive }) {
-  const { logout,userInfo } = useGlobalContext();
+function Navigation() {
+  const { logout, userInfo } = useGlobalContext();
+  const navigate = useNavigate();
+  const [active, setActive] = useState(1);
+  const handleNavigation = (id, path) => {
+    setActive(id);
+    navigate(path);
+  };
 
   return (
     <NavStyled>
-      <div className='flex flex-col gap-4' >
-      <div className="user-con" >
-        <img src="" alt="" className='h-16 w-16' />
-        <div className="text">
-          <h2 className='font-semibold text-xl capitalize'>{userInfo}</h2>
-          <p className='text-xs'>Your money</p>
+      <div className='flex flex-col gap-4'>
+        <div className="user-con">
+          <img src="" alt="" className='h-16 w-16' />
+          <div className="text">
+            <h2 className='font-semibold text-xl capitalize'>{userInfo}</h2>
+            <p className='text-xs'>Your money</p>
+          </div>
         </div>
-      </div>
-      <div className='w-full h-px rounded-lg bg-[#a0a0a0]'></div>
+        <div className='w-full h-px rounded-lg bg-[#a0a0a0]'></div>
       </div>
 
       <ul className="menu-items">
         {menuItems.map((item) => (
           <li
             key={item.id}
-            onClick={() => setActive(item.id)}
+            onClick={() => handleNavigation(item.id, item.link)}
             className={active === item.id ? 'active' : ''}
           >
             {item.icon}
@@ -33,10 +40,10 @@ function Navigation({ active, setActive }) {
         ))}
       </ul>
       <div className="bg-black flex justify-center py-3 rounded-md" onClick={logout}>
-        <button className='flex items-center justify-center gap-4 text-base cursor-pointer'>{signout}Sign Out </button>
+        <button className='flex items-center justify-center gap-4 text-base cursor-pointer'>{signout}Sign Out</button>
       </div>
     </NavStyled>
-  )
+  );
 }
 
 const NavStyled = styled.nav`
@@ -58,16 +65,13 @@ const NavStyled = styled.nav`
     align-items: center;
     gap: 1rem;
     img {
-      /* width: 80px;
-      height: 80px; */
       border-radius: 50%;
       object-fit: cover;
       background: #fcf6f9;
-      border: 20x solid black;
+      border: 20px solid black;
       padding: 0.2rem;
       box-shadow: 0px 1px 17px rgba(0,0,0,0.6);
     }
-
   }
 
   .menu-items {
@@ -83,7 +87,6 @@ const NavStyled = styled.nav`
       font-size: medium;
       cursor: pointer;
       transition: all .4s ease-in-out;
-      /* color: rgba(34, 34, 96, .6); */
       padding-left: 1rem;
       position: relative;
       i {
@@ -95,13 +98,11 @@ const NavStyled = styled.nav`
   }
 
   .active {
-    color:rgba(34,34,96,1) !important;
-    font-weight: 00 !important;
-    /* letter-spacing: 0.02rem; */
+    color: rgba(34, 34, 96, 1) !important;
     font-weight: 400 !important;
     font-size: large !important;
     i {
-      color:#ededed !important;
+      color: #ededed !important;
     }
     &::before {
       content: "";

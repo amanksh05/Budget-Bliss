@@ -12,54 +12,31 @@ import Signup from './components/Signup';
 import { useGlobalContext } from './context/GlobalContext';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const { user } = useGlobalContext();
-  // const user = null
   const [active, setActive] = useState(1);
   const orbMemo = useMemo(() => <Orb />, []);
 
-  const displayData = () => {
-    switch (active) {
-      case 1:
-        return <Dashboard />;
-      case 2:
-        return <Dashboard />;
-      case 3:
-        return <Income />;
-      case 4:
-        return <Expenses />;
-      default:
-        return <Dashboard />;
-    }
-  };
-
-  // const PrivateRoute = ({ children }) => {
-  //   return user ? children : <Navigate to='/login' />;
-  // };
-
-  return (
+  return (<>
+    <ToastContainer autoClose={3000} />
     <Router>
       <AppStyled className="App">
         {orbMemo}
         <MainLayout>
           {user ? (
             <>
-              <Navigation active={active} setActive={setActive} />
+              <Navigation />
               <main>
-                  {displayData()}
                 <Routes>
-
-                  if(active===1){
-                    <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
-                  }
-                  else if(active===2){
-                    <Route path="/income" element={<PrivateRoute><Income /></PrivateRoute>} />
-                  }
-                  else if(active===3){
-                    <Route path="/expenses" element={<PrivateRoute><Expenses /></PrivateRoute>} />
-                  }
+                  <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+                  <Route path="/transactions" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+                  <Route path="/incomes" element={<PrivateRoute><Income /></PrivateRoute>} />
+                  <Route path="/expenses" element={<PrivateRoute><Expenses /></PrivateRoute>} />
+                  <Route path="*" element={<Navigate to="/dashboard" />} />
                 </Routes>
+                {/* {displayData(active)} */}
               </main>
             </>
           ) : (
@@ -74,8 +51,24 @@ function App() {
         </MainLayout>
       </AppStyled>
     </Router>
+  </>
   );
 }
+
+const displayData = (active) => {
+  switch (active) {
+    case 1:
+      return <Dashboard />;
+    case 2:
+      return <Dashboard />;
+    case 3:
+      return <Income />;
+    case 4:
+      return <Expenses />;
+    default:
+      return <Dashboard />;
+  }
+};
 
 const AppStyled = styled.div`
   height: 100vh;

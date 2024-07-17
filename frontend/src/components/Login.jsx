@@ -1,27 +1,34 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useGlobalContext } from '../context/GlobalContext';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const { login } = useGlobalContext()
+  const { login, user } = useGlobalContext()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      login(email, password);
+      await login(email, password);
+      toast.success("Login Success.")
       navigate('/dashboard');
-      console.log("Login Success");
+
+      // console.log("Login Success");
     } catch (error) {
+      toast.error("Invalid login credentials.")
       console.error('Error logging in', error);
       alert('Login failed. Please check your credentials and try again.');
     }
     // console.log(res.data.token);
   };
+
+  if(user) <Navigate to={"/dashboard"}/>
 
   return (
     <div className='flex justify-center flex-col items-center bg-slate-50 mt-11 mx-auto  py-4 px-10 max-w-min rounded-lg' >

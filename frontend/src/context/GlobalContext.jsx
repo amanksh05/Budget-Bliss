@@ -1,6 +1,9 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from 'axios';
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const BASE_URL = "http://localhost:5000/api";
 
 const GlobalContext = createContext();
@@ -19,20 +22,22 @@ export const GlobalProvider = ({ children }) => {
   }
 
   const login = async (email, password) => {
-    const res = await axios.post(`${BASE_URL}/auth/login`, { email, password });
-    setUser(res.data.token);
-    setUserId(res.data.id)
-    console.log(res.data.id);
-    localStorage.setItem('token', res.data.token);
-    localStorage.setItem('userId', res.data.id);
-    userDetails(userId)
+      
+      const res = await axios.post(`${BASE_URL}/auth/login`, { email, password });
+      setUser(res.data.token);
+      setUserId(res.data.id)
+      console.log(res.data.id);
+      localStorage.setItem('token', res.data.token);
+      localStorage.setItem('userId', res.data.id);
+      await userDetails(res.data.id)
+
   }
 
   const userDetails = async (userId) => {
     try {
         const response = await axios.post(`${BASE_URL}/auth/profile`, { userId });
         localStorage.setItem('userInfo', response.data.username);
-        console.log(userInfo.name);
+        // console.log(userInfo.name);
 
   
     } catch (error) {
@@ -46,6 +51,8 @@ export const GlobalProvider = ({ children }) => {
 
   const logout = () => {
     setUser(null);
+    setUserId(null);
+    setUserInfo(null);
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     localStorage.removeItem('userInfo');
@@ -143,6 +150,7 @@ export const GlobalProvider = ({ children }) => {
     if (user) {
       getIncomes();
       getExpenses();
+      userDetails(userId);
     }
   }, [user]);
 
