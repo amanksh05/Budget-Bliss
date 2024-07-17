@@ -4,7 +4,7 @@ import axios from 'axios';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const BASE_URL = "http://localhost:5000/api";
+const BASE_URL = `${import.meta.env.API}/api`;
 
 const GlobalContext = createContext();
 
