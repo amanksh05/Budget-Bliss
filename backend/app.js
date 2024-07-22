@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const { db } = require('./db/db')
 const {readdirSync} = require('fs')
-const { router } = require('./routes/Transaction')
+// const { router } = require('./routes/Transaction')
 // const authRoutes = require('./routes/auth')
 const app = express()
 
