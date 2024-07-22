@@ -28,7 +28,7 @@ app.use('/api/auth',authRoutes)
 app.use('/api/transaction',transaction)
 
 app.get('/',(req,res)=>{
-    res.send('Hello World')
+    res.status(200).json({message:"working"})
 })
 
 const server = ()=>{
